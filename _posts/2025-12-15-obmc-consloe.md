@@ -6,6 +6,8 @@ tags: [openbmc, uart, log]     # TAG names should always be lowercase
 author: baiqing
 description: OpenBMC 中 obmc-console 的运行原理和基本使用方法
 toc: true
+mermaid: true
+pin: true
 ---
 
 ## obmc-console 的功能
@@ -65,14 +67,14 @@ obmc-console 提供了一个串口（虚拟串口）监听和转发的服务，�
 Run server中运行模式：
 
 ```mermaid
-flowchart LR
-A[Run server] -->|poll data from ttyS10| B(ringbuffer)
-B -.->|callback| C[Registered socket consumer]
-B -.->|callback| D[Registered tty consumer]
-B -.->|callback| E[Registered log consumer]
-C --> F[obmc-console-client]
-D --> G[physical tty]
-E --> H[log file]
+ flowchart LR
+  A[Run server] -->|poll data from ttyS10| B(ringbuffer)
+  B -.->|callback| C[Registered socket consumer]
+  B -.->|callback| D[Registered tty consumer]
+  B -.->|callback| E[Registered log consumer]
+  C --> F[obmc-console-client]
+  D --> G[physical tty]
+  E --> H[log file]
 ```
 
 init config from config file
@@ -149,6 +151,7 @@ yaml
 
 lpc-address
 : 指定vuart `lpc`地址，自定义的vuart 未配置的话使用openbmc 的默认配置：`lpc-address = 0x3f8 sirq = 4`
+
 sirq
 : 指定vuart `sirq`, 自定义的vuart 未配置的话使用openbmc 的默认配置：`lpc-address = 0x3f8 sirq = 4`
 
@@ -156,6 +159,7 @@ sirq
 
 logfile
 : log文件路径例如`mylog.log`
+
 logsize
 : log文件大小，设置格式：N k|kB|M|MB|G|GB, 超过指定大小后会将旧log转储为 `mylog.log.1`
 
@@ -163,6 +167,7 @@ logsize
 
 local-tty
 : 将串口数据转发到 指定的串口
+
 local-tty-baud
 : 转发串口波特率
 
@@ -170,7 +175,9 @@ local-tty-baud
 
 upstream-tty
 : 当server 命令行中未描述指定的串口时，使用这个选项描述
+
 baud
 : 指定监听串口频率
+
 ringbuffer-size
 : 指定串口缓存的大小，默认128K，设置格式：N k|kB|M|MB|G|GB
