@@ -8,7 +8,5 @@ order: 4
 
 Submissions Welcome.
 
-
-
 > For content suggestions, please contact: <baiqing2015@126.com>
 {: .prompt-tip }
