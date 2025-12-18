@@ -7,7 +7,7 @@ author: baiqing
 description: OpenBMC 中 obmc-console 的运行原理和基本使用方法
 toc: true
 mermaid: true
-pin: true
+pin: false
 ---
 
 ## obmc-console 的功能
